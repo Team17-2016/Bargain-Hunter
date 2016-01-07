@@ -27,6 +27,7 @@ Requirements: https://github.com/TelerikAcademy/Node.js-Course/tree/master/Teamw
 	* description - required
 	* price - required, minValue = 0
 	* datePublished - required
+	* category - required ?
 	* active - type Boolean
 	* user - creator
 	* image - optional
