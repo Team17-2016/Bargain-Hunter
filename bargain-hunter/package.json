@@ -1,0 +1,19 @@
+{
+  "name": "bargain-hunter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "team17",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "express": "^4.13.3",
+    "jade": "^1.11.0",
+    "kerberos": "0.0.17",
+    "mongoose": "^4.3.4",
+    "morgan": "^1.6.1"
+  }
+}
