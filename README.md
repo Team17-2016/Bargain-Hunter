@@ -7,36 +7,34 @@ Requirements: https://github.com/TelerikAcademy/Node.js-Course/tree/master/Teamw
 ### Models
 #### User
 	* _id - auto-generated from db 
-	* username - required
-	* usernameLowered - ?
-	* password - required
-	* token - auto-generated
-	* votes - type number ?
-	* offers - array of offers created by user
-	* favourites - array of offers watched by user ?
-	* comments ?
-	* isAdmin - type Boolean ?
-	* city - optional
-	* firstName - optional
-	* lastName - optional
-	* age - optional
-	* phone - optional
-	* email - optional
+	* username - String required
+	* password - String required
+	* token - String auto-generated
+	* rating- { votesCount: Number, votesSum: Number } => Average rating can be saved in a virtual property calculated by the formula (AverageRating = votesSum/votesCount)
+	* offers - array of offers created by the user
+	* favourites - array of offers watched by the user (?good to have?)
+	* isAdmin - Boolean required
+	* city - String optional
+	* firstName - String optional
+	* lastName - String optional
+	* age - Number optional
+	* phone - String optional
+	* email - String optional
 #### Offer/Ad or something similar
-	* title - required
-	* description - required
-	* price - required, minValue = 0
-	* datePublished - required
-	* category - required ?
-	* active - type Boolean
+	* title - String required
+	* description - String required
+	* price - Number required, minValue = 0
+	* datePublished - Date required
+	* category - String required
+	* active - Boolean required
 	* user - creator
 	* image - optional
-	* comments
-	* expirationDate ?
+	* comments - array of comments for the current Ad
+	* expirationDate - Date required
 #### Comment ?
-	* user
-	* offer
-	* date
+	* user - the username of the User that wrote the comment - String required
+	* text - String required
+	* date - Date required
 
 
 ### Server routes
