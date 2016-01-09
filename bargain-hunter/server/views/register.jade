@@ -1,0 +1,33 @@
+extend main
+
+block content
+    div(class="panel panel-danger col-lg-offset-4 col-lg-4")
+        div(class="panel-heading")
+            h3(class="panel-title text-center")
+                | Register to our deals store
+        div(class="panel-body")
+            form(class="form-horizontal")
+                fieldset
+                    div(class="form-group")
+                        label(for="inputEmail" class="col-lg-4 control-label")
+                            | Email
+                        div(class="col-lg-8")
+                            input(type="text" class="form-control" id="inputEmail" placeholder="Email")
+                    div(class="form-group")
+                        label(for="inputUsername" class="col-lg-4 control-label")
+                            | Username
+                        div(class="col-lg-8")
+                            input(type="text" class="form-control" id="inputUsername" placeholder="Username")
+                    div(class="form-group")
+                        label(for="inputPassword" class="col-lg-4 control-label")
+                            | Password
+                        div(class="col-lg-8")
+                            input(type="text" class="form-control" id="inputPassword" placeholder="Password")
+                    div(class="form-group")
+                        label(for="inputConfirmPassword" class="col-lg-4 control-label")
+                            | Confirm password
+                        div(class="col-lg-8")
+                            input(type="text" class="form-control" id="inputConfirmPassword" placeholder="Confirm password")
+                    div(class="form-group")
+                        button(type="submit" class="btn btn-danger col-lg-offset-4 col-lg-8")
+                            | Register

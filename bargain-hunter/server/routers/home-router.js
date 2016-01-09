@@ -20,5 +20,9 @@ module.exports = function(app, express) {
         res.render('login');
     });
 
+    router.get('/Register', function(req, res) {
+        res.render('register');
+    });
+
     app.use(router);
 };

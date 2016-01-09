@@ -21,14 +21,18 @@ app.use(bodyParser.urlencoded({
 }));
 
 // Setup static files access
-app.use("/libs", express.static(__dirname + '/public/css/libs'));
-app.use("/css", express.static(__dirname + '/public/css/'));
+app.use("/public", express.static(__dirname + '/public/'));
+
+// Setup database models
+require('./server/models');
 
 // Setup Jade
 require('./server/config/jade-config')(app);
 
-require('./server/models');
+// Setup Authentication
 require('./server/config/auth');
+
+// Setup routers
 require('./server/routers')(app, express);
 
 // Middleware for last-resort error-handling
