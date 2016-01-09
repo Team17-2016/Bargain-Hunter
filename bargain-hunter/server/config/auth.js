@@ -9,6 +9,7 @@ let passport = require('passport'),
 // credentials (`token`) contained in the request.  The function must invoke
 // `cb` with a user object, which will be set at `req.user` in route handlers
 // after authentication.
+
 module.exports = passport.use(new Strategy(function (token, cb) {
     console.log(`---------token------${token}`);
     User.findOne({ token: token }, function (err, user) {

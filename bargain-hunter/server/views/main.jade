@@ -1,0 +1,63 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset="UTF-8")
+        title
+            | Bargain Hunter
+
+        link(href="/libs/bootstrap/dist/css/bootstrap.min.css", rel="stylesheet")
+        link(href="/css/site.css", rel="stylesheet")
+
+    script(src="/libs/jquery/dist/jquery.min.js")
+        script(src="/libs/bootstrap/dist/js/bootstrap.min.js")
+    body
+        nav(class="navbar navbar-inverse")
+            div(class="container-fluid")
+                div(class="navbar-header")
+                    button(type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1")
+                        span(class="sr-only")
+                            | Toggle navigation
+                        span(class="icon-bar")
+                        span(class="icon-bar")
+                        span(class="icon-bar")
+                    a(class="navbar-brand" href="/")
+                        | Bargain hunter
+                div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
+                    ul(class="nav navbar-nav")
+                        li
+                            a(href="/Home")
+                                | Home
+                        li
+                            a(href="/Deals")
+                                | Deals
+                    ul(class="nav navbar-nav navbar-right")
+                        if(isAuthenticated)
+                            li
+                                a(href="/Logout")
+                                    | Logout
+                        else
+                            li
+                                a(href="/Login")
+                                    | Login
+                            li
+                                a(href="/Register")
+                                    | Register
+        block content
+
+        footer(class="text-center")
+            hr
+            div
+                strong
+                    | Copyrights:
+                    a(href="https://opensource.org/licenses/MIT")
+                        |  MIT
+            br
+            div
+                strong
+                    | Powered by:
+                    a(href="http://getbootstrap.com/")
+                        |  Twitter Bootstrap
+                    |  &
+                    a(href="http://jade-lang.com/")
+                        |  Jade
+            hr

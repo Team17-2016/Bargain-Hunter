@@ -11,20 +11,27 @@ let express = require('express'),
 
 db.init();
 
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
-
-// parse application/json
-app.use(bodyParser.json());
-
 // TODO remove/edit when project is ready
 app.use(logger(LOGGER_FORMAT));
 
+// Setup Body-Parser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
+// Setup static files access
+app.use("/libs", express.static(__dirname + '/public/css/libs'));
+app.use("/css", express.static(__dirname + '/public/css/'));
+
+// Setup Jade
+require('./server/config/jade-config')(app);
+
 require('./server/models');
 require('./server/config/auth');
-require('./server/routers')(app);
+require('./server/routers')(app, express);
 
-// next should stay, otherwise not working
+// Middleware for last-resort error-handling
 app.use(function(err, req, res, next) {
     if (err) {
         res.status(err.status || 500)
@@ -34,6 +41,7 @@ app.use(function(err, req, res, next) {
     }
 });
 
+// Start server event listener
 app.listen(PORT, function (err) {
     if (err) {
         console.log(err);
