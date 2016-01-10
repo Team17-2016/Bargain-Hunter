@@ -6,6 +6,10 @@ let mongoose = require('mongoose'),
 
 const TOKEN_SIZE = 70;
 
+function getRegisterView(req, res, next) {
+    res.render('register');
+}
+
 function register(req, res, next) {
     let requestedUser = req.body,
         newUser = new User(requestedUser);
@@ -53,6 +57,7 @@ function login(req, res, next) {
 }
 
 module.exports = {
+    getRegisterView: getRegisterView,
     register: register,
     login: login,
     nonexistent: function () {
