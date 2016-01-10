@@ -1,7 +1,8 @@
 'use strict';
 
 let mongoose = require('mongoose'),
-    User = mongoose.model('User');
+    User = mongoose.model('User'),
+    encryption = require('./../utilities/encryption');
 
 function getRegisterView(req, res, next) {
     res.render('register');
@@ -13,6 +14,9 @@ function register(req, res, next) {
 
     let requestedUser = req.body,
         newUser = new User(requestedUser);
+
+    newUser.salt = encryption.generateSalt();
+    newUser.passwordHashed = encryption.generateHashedPassword(newUser.salt, req.body.password);
 
     newUser.save(function (err) {
         if (err) {

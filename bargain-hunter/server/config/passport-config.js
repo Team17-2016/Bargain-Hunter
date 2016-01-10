@@ -1,5 +1,7 @@
 'use strict';
 
+// http://toon.io/understanding-passportjs-authentication-flow/
+
 let passport = require('passport'),
     LocalPassport = require('passport-local'),
     User = require('mongoose').model('User');
@@ -12,18 +14,11 @@ module.exports = function() {
                 return;
             }
 
-            if(!user || user.password !== password) {
+            if(!user || !(user.authenticate(password))) {
                 return done(null, false);
             }
 
             return done(null, user);
-
-            /*if (user && user.authenticate(password)) {
-             return done(null, user);
-             }
-             else {
-             return done(null, false);
-             }*/
         })
     }));
 

@@ -1,6 +1,8 @@
 'use strict';
 
-let mongoose = require('mongoose');
+let mongoose = require('mongoose'),
+    encryption = require('./../utilities/encryption');
+
 let schema = new mongoose.Schema({
     username: {
         type: String,
@@ -9,11 +11,25 @@ let schema = new mongoose.Schema({
             unique: true
         }
     },
-    password: {
+    passwordHashed: {
+        type: String,
+        required: true
+    },
+    salt: {
         type: String,
         required: true
     }
+});
 
+schema.method({
+    authenticate: function(password) {
+        if (encryption.generateHashedPassword(this.salt, password) === this.passwordHashed) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 });
 
 let User = mongoose.model('User', schema);
