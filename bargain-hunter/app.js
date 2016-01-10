@@ -7,6 +7,7 @@ let express = require('express'),
     bodyParser = require('body-parser'),
     logger = require('morgan'),
     passport = require('passport'),
+    expressSession = require('express-session'),
     db = require('./server/config/db'),
     app = express();
 
@@ -14,6 +15,8 @@ db.init();
 
 // TODO remove/edit when project is ready
 app.use(logger(LOGGER_FORMAT));
+
+app.use(expressSession({ secret: 'coffee', resave: false, saveUninitialized: false }));
 
 // Setup Body-Parser
 app.use(bodyParser.json());
