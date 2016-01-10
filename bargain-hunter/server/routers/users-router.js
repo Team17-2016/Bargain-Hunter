@@ -3,13 +3,16 @@
 module.exports = function(app, express) {
     let router = express.Router(),
         passport = require('passport'),
-        controller = require('./../controllers/users-controller');
+        controller = require('./../controllers/users-controller'),
+        auth = require('./../config/auth'),
+        connectEnsureLogin = require('connect-ensure-login');
 
     router
         .get('/register', controller.getRegisterView)
         .post('/register', controller.register)
-        .post('/login', controller.login)
-        .get('/profile', passport.authenticate('bearer', { session: false }), controller.nonexistent);
+        .get('/login', controller.getLoginView)
+        .post('/login', auth.login)
+        .get('/profile', connectEnsureLogin.ensureLoggedIn(), controller.nonexistent);
 
     app.use('/users', router);
 };

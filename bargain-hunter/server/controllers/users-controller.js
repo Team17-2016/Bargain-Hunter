@@ -11,6 +11,9 @@ function getRegisterView(req, res, next) {
 }
 
 function register(req, res, next) {
+    // TODO validation
+    // TODO do not keep passwords in db!
+
     let requestedUser = req.body,
         newUser = new User(requestedUser);
 
@@ -23,6 +26,10 @@ function register(req, res, next) {
 
         res.status(201).json('Registered successfully.');
     });
+}
+
+function getLoginView(req, res, next) {
+    res.render('login');
 }
 
 function login(req, res, next) {
@@ -59,6 +66,7 @@ function login(req, res, next) {
 module.exports = {
     getRegisterView: getRegisterView,
     register: register,
+    getLoginView: getLoginView,
     login: login,
     nonexistent: function () {
         console.log('called');
