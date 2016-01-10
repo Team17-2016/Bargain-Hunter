@@ -5,24 +5,13 @@ module.exports = function(app, express) {
 
     router.get('/', function(req, res) {
         console.log('Called Home route');
+        console.log(`---req user----${req.user}`);
         res.render('home');
     });
 
     router.get('/Home', function(req, res) {
         res.redirect('/');
     });
-
-    router.get('/Deals', function(req, res) {
-        res.render('deals');
-    });
-
-    router.get('/Login', function(req, res) {
-        res.render('login');
-    });
-
-    router.get('/Register', function(req, res) {
-        res.render('register');
-    });
-
+    
     app.use(router);
 };

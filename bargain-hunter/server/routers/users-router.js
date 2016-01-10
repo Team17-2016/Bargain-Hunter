@@ -2,7 +2,6 @@
 
 module.exports = function(app, express) {
     let router = express.Router(),
-        passport = require('passport'),
         controller = require('./../controllers/users-controller'),
         auth = require('./../config/auth'),
         connectEnsureLogin = require('connect-ensure-login');

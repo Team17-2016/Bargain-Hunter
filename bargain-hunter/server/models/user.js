@@ -12,10 +12,8 @@ let schema = new mongoose.Schema({
     password: {
         type: String,
         required: true
-    },
-    token: {
-        type: String
     }
+
 });
 
 let User = mongoose.model('User', schema);
