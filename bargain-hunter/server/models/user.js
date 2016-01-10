@@ -1,7 +1,8 @@
 'use strict';
 
 let mongoose = require('mongoose'),
-    encryption = require('./../utilities/encryption');
+    encryption = require('./../utilities/encryption'),
+    USERS_CONSTANTS = require('./../utilities/constants').USERS;
 
 let schema = new mongoose.Schema({
     username: {
@@ -9,7 +10,9 @@ let schema = new mongoose.Schema({
         required: true,
         index : {
             unique: true
-        }
+        },
+        minlength: USERS_CONSTANTS.usernameMinLen,
+        maxlength: USERS_CONSTANTS.usernameMaxLen
     },
     passwordHashed: {
         type: String,
@@ -18,6 +21,38 @@ let schema = new mongoose.Schema({
     salt: {
         type: String,
         required: true
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    votesCount: {
+        type: Number,
+        default: 0
+    },
+    votesSum: {
+        type: Number,
+        default: 0
+    },
+    area: {
+        type: String
+    },
+    firstName: {
+        type: String,
+        minlength: USERS_CONSTANTS.realNameMinLen,
+        maxlength: USERS_CONSTANTS.realNameMaxLen
+    },
+    lastName: {
+        type: String,
+        minlength: USERS_CONSTANTS.realNameMinLen,
+        maxlength: USERS_CONSTANTS.realNameMaxLen
+    },
+    phone: {
+        type: String
     }
 });
 

@@ -12,7 +12,7 @@ module.exports = function(app, express) {
         .get('/login', controller.getLoginView)
         .post('/login', auth.login)
         .post('/logout', auth.logout)
-        .get('/profile', connectEnsureLogin.ensureLoggedIn(), controller.nonexistent);
+        .get('/profile', connectEnsureLogin.ensureLoggedIn(), controller.getProfileView);
 
     app.use('/users', router);
 };
