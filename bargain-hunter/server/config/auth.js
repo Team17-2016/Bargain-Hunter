@@ -3,15 +3,27 @@
 let passport = require('passport');
 
 function login(req, res, next) {
-    var auth = passport.authenticate('local', function(err, user) {
-        if (err) return next(err);
+    let auth = passport.authenticate('local', function(err, user) {
+        if (err){
+            return next(err);
+        }
+
         if (!user) {
-            res.send({success: false})
+            // TODO redirect to login but add there message to the user
+            let error = {
+                status: 400,
+                message: 'Invalid username or password.'
+            };
+
+            next(error);
         }
 
         req.logIn(user, function(err) {
-            if (err) return next(err);
-            res.send({success: true, user: user});
+            if (err) {
+                return next(err)
+            }
+
+            res.redirect('../home');
         })
     });
 
@@ -20,7 +32,7 @@ function login(req, res, next) {
 
 function logout(req, res, next) {
     req.logout();
-    res.end();
+    res.redirect('../home');
 }
 
 function isAuthenticated(req, res, next) {

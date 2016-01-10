@@ -24,7 +24,7 @@ function register(req, res, next) {
             return;
         }
 
-        res.status(201).json('Registered successfully.');
+        res.redirect('login');
     });
 }
 
