@@ -6,6 +6,7 @@ const PORT = 65442,
 let express = require('express'),
     bodyParser = require('body-parser'),
     logger = require('morgan'),
+    passport = require('passport'),
     db = require('./server/config/db'),
     app = express();
 
@@ -20,6 +21,9 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Setup static files access
 app.use("/public", express.static(__dirname + '/public/'));
 
@@ -29,8 +33,7 @@ require('./server/models');
 // Setup Jade
 require('./server/config/jade-config')(app);
 
-// Setup Authentication
-require('./server/config/auth');
+require('./server/config/passport-config')();
 
 // Setup routers
 require('./server/routers')(app, express);
