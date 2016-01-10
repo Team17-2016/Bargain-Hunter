@@ -9,7 +9,6 @@ Requirements: https://github.com/TelerikAcademy/Node.js-Course/tree/master/Teamw
 	* _id - auto-generated from db 
 	* username - String required
 	* password - String required
-	* token - String auto-generated
 	* rating- { votesCount: Number, votesSum: Number } => Average rating can be saved in a virtual property calculated by the formula (AverageRating = votesSum/votesCount)
 	* offers - array of offers created by the user
 	* favourites - array of offers watched by the user (?good to have?)
@@ -39,24 +38,29 @@ Requirements: https://github.com/TelerikAcademy/Node.js-Course/tree/master/Teamw
 
 ### Server routes
 
-* **api/users/register**
+* **/users/register - done**
 	* GET - register form
 	* POST - register user
-* **api/users/login**
+* **/users/login - done**
 	* GET - login form
 	* POST - login user	
-* **api/users/logout** 	
-	* POST - to delete token ?
-* **api/users/profile**
+* **/users/logout** 	
+	* POST
+* **/users/profile**
 	* GET - personal user info
-	* POST/PUT - update profile
-* **api/users**
+	* PUT - update profile
+* **/users**
 	* GET - all, without details
-* **api/users/:id**
+* **/users/:id**
 	* GET - user details
 	
 
 ### UI
-* Bootstrap?
+* Bootstrap
+ 
+### TODO
+* bower should be used for client side
+* js (Angular) for the logout to be fully working
+* ...
 
 #### Feel free to make changes and add suggestions :)
