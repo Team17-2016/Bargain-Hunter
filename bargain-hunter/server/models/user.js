@@ -67,5 +67,13 @@ schema.method({
     }
 });
 
+schema.virtual('rating').get(function () {
+    if (this.votesSum !== 0 && this.votesCount !== 0) {
+        return this.votesSum / this.votesCount;
+    }
+
+    return 0;
+});
+
 let User = mongoose.model('User', schema);
 module.exports = User;

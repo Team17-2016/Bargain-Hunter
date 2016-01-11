@@ -65,7 +65,8 @@ function getProfileView(req, res, next) {
             lastName: dbUser.lastName,
             phone: dbUser.phone,
             email: dbUser.email,
-            area: dbUser.area
+            area: dbUser.area,
+            rating: dbUser.rating
         };
 
         res.render('profile', {
