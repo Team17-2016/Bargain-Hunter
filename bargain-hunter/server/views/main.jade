@@ -10,6 +10,8 @@ html(lang='en')
 
         script(src="/public/bower_components/jquery/dist/jquery.min.js")
         script(src="/public/bower_components/bootstrap/dist/js/bootstrap.min.js")
+        script(src="/public/bower_components/angular/angular.js")
+        block headContent
     body
         nav(class="navbar navbar-inverse")
             div(class="container-fluid")
@@ -64,3 +66,5 @@ html(lang='en')
                     a(href="http://jade-lang.com/")
                         |  Jade
             hr
+
+        block bottomBodyContent
