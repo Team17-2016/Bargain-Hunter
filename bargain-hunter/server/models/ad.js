@@ -6,10 +6,12 @@ let thirtyDaysInMilliseconds = 30*24*60*60*1000;
 let CommentSchema = new mongoose.Schema({
     author: {
         type: String,
+        trim: true,
         required: true
     },
     content: {
         type: String,
+        trim: true,
         required: true
     },
     publishDate: {
@@ -22,14 +24,17 @@ let CommentSchema = new mongoose.Schema({
 let AdSchema = new mongoose.Schema({
     title: {
         type: String,
+        trim: true,
         required: true
     },
     description: {
         type: String,
+        trim: true,
         required: true
     },
     category: {
         type: String,
+        trim: true,
         required: true
     },
     price: {
@@ -53,10 +58,12 @@ let AdSchema = new mongoose.Schema({
     },
     owner: {
         type: String,
+        trim: true,
         required: true
     },
     imagePath: {
-        type: String
+        type: String,
+        trim: true
     },
     comments: [CommentSchema]
 });
