@@ -53,12 +53,14 @@ Requirements: https://github.com/TelerikAcademy/Node.js-Course/tree/master/Teamw
 	* GET - all, without details
 * **/users/:id**
 	* GET - user details
-* **/ads/
+* **/ads/**
 	* GET - all ads with brief description
 * **/ads/:id**
 	* GET - single ad with detailed description
-* **/ads/
-	* POST- add new Advertisement
+* **/ads/**
+	* POST - add new Advertisement
+* **/ads/:id**
+	* DELETE - delete Advertisement by id
 	
 
 ### UI
