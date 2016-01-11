@@ -6,7 +6,7 @@ module.exports = function(app, express) {
         auth = require('./../config/auth'),
         connectEnsureLogin = require('connect-ensure-login');
 
-    router.post('/', connectEnsureLogin.ensureLoggedIn('/ads/login'), function() {});
+    router.post('/', connectEnsureLogin.ensureLoggedIn('/users/login'), function() {});
 
     app.use('/ads', router);
 };
