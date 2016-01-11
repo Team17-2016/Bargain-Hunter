@@ -4,8 +4,10 @@ let mongoose = require('mongoose'),
     Ad = mongoose.model('Ad'),
     Comment = mongoose.model('Comment');
 
+const DEFAULT_ADS_FILTER_OPTIONS = {isActive: true};
+
 function getAllAds(req, res, next) {
-    let filterOptions = req.body.filterOptions || {};
+    let filterOptions = req.body.filterOptions || DEFAULT_ADS_FILTER_OPTIONS;
 
     Ad.find(filterOptions, function(err, advertisements) {
         if(err) {
@@ -23,21 +25,23 @@ function getAllAds(req, res, next) {
             return;
         }
 
-        res.status(201).render('ads', advertisements)
+        res.status(201).json(advertisements);
+
+        //res.status(201).render('ads', advertisements);
     })
 }
 
-function getAdById(req, res, next) {
+function getAdvertisementById(req, res, next) {
     let id = req.params.id;
 
-    Ad.find({id: id}, function(err, advertisement) {
+    Ad.findById(id, function(err, advertisement) {
         if(err) {
             next(err);
             return;
         }
 
         if(!advertisement) {
-            res.statusCode(404).json({
+            res.status(404).json({
                 result: {
                     message: 'Advertisement with the provided ID does not exist.'
                 }
@@ -46,23 +50,23 @@ function getAdById(req, res, next) {
             return;
         }
 
-        res.statusCode(201).render('advertisement-details', advertisement)
+        res.status(201).json(advertisement);
+        //res.status(201).render('advertisement-details', advertisement)
     });
 }
 
 function postAdvertisement(req, res, next) {
     let ad = new Ad(req.body);
 
-    //TODO:Test
-    console.log(req.body);
-
     ad.save(function(err) {
         if(err) {
+            console.log('Error posting ad');
             next(err);
         } else {
-            res.statusCode(200).json({
+            res.status(200).json({
                 result: {
-                    message: 'Advertisement successfully added!'
+                    message: 'Advertisement successfully added!',
+                    id: ad.id
                 }
             });
         }
@@ -72,8 +76,11 @@ function postAdvertisement(req, res, next) {
 function removeAdvertisementById(req, res, next) {
     let id = req.params.id;
 
+    // TODO: Get current user and match if he is the owner of the advertisement marked for removal.
+    // TODO: Temporary fix is to expose the Remove button in the UI only for the users that match the username of the owner
+
     if(!id) {
-        res.statusCode(404).json({
+        res.status(404).json({
             result: {
                 message: 'ID must be provided for an advertisement to be removed.'
             }
@@ -86,13 +93,13 @@ function removeAdvertisementById(req, res, next) {
             }
 
             if(!advertisement) {
-                res.statusCode(404).json({
+                res.status(404).json({
                     result: {
-                        message: 'Advertisement with id: ' + advertisement.id + ' has not been found.'
+                        message: 'Advertisement with the provided ID does not exist.'
                     }
                 })
             } else {
-                res.statusCode(200).json({
+                res.status(200).json({
                     result: {
                         message: 'Advertisement with id: ' + advertisement.id + ' successfully removed.'
                     }
@@ -104,7 +111,7 @@ function removeAdvertisementById(req, res, next) {
 
 module.exports = {
     getAllAdsByFilter: getAllAds,
-    getAdvertisementById: getAdById,
+    getAdvertisementById: getAdvertisementById,
     postAdvertisement: postAdvertisement,
     removeAdvertisement: removeAdvertisementById
 };
