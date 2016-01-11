@@ -22,8 +22,6 @@ function register(req, res, next) {
         return;
     }
 
-    console.log(`----email ---${requestedUser.email}`);
-
     let newUser = new User();
     newUser.username = requestedUser.username;
     newUser.email = requestedUser.email;
@@ -76,6 +74,34 @@ function getProfileView(req, res, next) {
     });
 }
 
+function getUser(req, res, next) {
+    if (!req.query.name) {
+        next({ status: 400 });
+        return;
+    }
+
+    User.findOne({ username: req.query.name }, function (err, dbUser) {
+        if (err) {
+            next(err);
+            return;
+        }
+
+        if (!dbUser) {
+            res.status(200)
+                .json({});
+            return;
+        }
+
+        let foundUser = {
+            username: dbUser.username
+        };
+
+        res.status(200)
+            .json(foundUser);
+
+    });
+}
+
 function checkIfValidUser(user) {
     if (!user) {
         return false;
@@ -98,5 +124,6 @@ module.exports = {
     getRegisterView: getRegisterView,
     register: register,
     getLoginView: getLoginView,
-    getProfileView: getProfileView
+    getProfileView: getProfileView,
+    getUser: getUser
 };

@@ -12,7 +12,8 @@ module.exports = function(app, express) {
         .get('/login', controller.getLoginView)
         .post('/login', auth.login)
         .post('/logout', auth.logout)
-        .get('/profile', connectEnsureLogin.ensureLoggedIn('/users/login'), controller.getProfileView);
+        .get('/profile', connectEnsureLogin.ensureLoggedIn('/users/login'), controller.getProfileView)
+        .get('/', controller.getUser);
 
     app.use('/users', router);
 };
