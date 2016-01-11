@@ -51,12 +51,60 @@ function getAdById(req, res, next) {
 }
 
 function postAdvertisement(req, res, next) {
-    let ad = new Ad()
+    let ad = new Ad(req.body);
+
+    //TODO:Test
+    console.log(req.body);
+
+    ad.save(function(err) {
+        if(err) {
+            next(err);
+        } else {
+            res.statusCode(200).json({
+                result: {
+                    message: 'Advertisement successfully added!'
+                }
+            });
+        }
+    });
+}
+
+function removeAdvertisementById(req, res, next) {
+    let id = req.params.id;
+
+    if(!id) {
+        res.statusCode(404).json({
+            result: {
+                message: 'ID must be provided for an advertisement to be removed.'
+            }
+        });
+    } else {
+        Ad.findByIdAndRemove(id, function(err, advertisement){
+            if(err) {
+                next(err);
+                return;
+            }
+
+            if(!advertisement) {
+                res.statusCode(404).json({
+                    result: {
+                        message: 'Advertisement with id: ' + advertisement.id + ' has not been found.'
+                    }
+                })
+            } else {
+                res.statusCode(200).json({
+                    result: {
+                        message: 'Advertisement with id: ' + advertisement.id + ' successfully removed.'
+                    }
+                });
+            }
+        })
+    }
 }
 
 module.exports = {
     getAllAdsByFilter: getAllAds,
     getAdvertisementById: getAdById,
     postAdvertisement: postAdvertisement,
-    removeAdvertisement: removeAdvertisement
+    removeAdvertisement: removeAdvertisementById
 };
