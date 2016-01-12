@@ -1,0 +1,41 @@
+extend main
+
+block content
+    div(class="col-lg-offset-3 col-lg-6")
+        h1.text-center
+            strong=ad.title
+        img.advertisement-image(src=ad.imageUrl)
+        hr
+    div.col-lg-3
+        h2
+            strong
+                | Owner:&nbsp;
+            =ad.owner.username
+        h2
+            strong
+                | Rating:&nbsp;
+            =ad.owner.rating
+                | /5
+        h2
+            strong
+                | Price:
+        h3
+            p=ad.price
+                | $
+        h2
+            strong
+                | Description:
+        h3
+            p=ad.description
+
+    h2.comment.text-center
+        strong
+            | Comments
+    each comment in ad.comments
+        div.comment.col-lg-offset-3.col-lg-6
+            h5.col-lg-3
+                strong=comment.author
+            h5.col-lg-offset-4.col-lg-5
+                | Published on:&nbsp;
+                =comment.publishDate
+            p=comment.content

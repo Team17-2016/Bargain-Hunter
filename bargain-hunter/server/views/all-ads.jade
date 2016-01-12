@@ -1,0 +1,8 @@
+extend main
+
+block content
+    each ad in ads
+        div(class="advertisement-brief")
+            h3.text-center=ad.title
+            a(href="/ads/"+ad.id)
+                img.advertisement-image(src=ad.imageUrl)
