@@ -74,6 +74,52 @@ function getProfileView(req, res, next) {
     });
 }
 
+function getProfileEditView(req, res, next) {
+    res.render('profile-edit', {
+        isAuthenticated: true,
+        data: {
+            email: req.user.email,
+            firstName: req.user.firstName
+        }
+    });
+}
+
+function editProfile(req, res, next) {
+    let requestedUser = req.body;
+    var updateUser = {};
+
+    if (!requestedUser.email || !checkIfValidEmail(requestedUser.email)) {
+        next({
+            status: 400,
+            message: 'Bad request'
+        });
+        return;
+    }
+
+    updateUser.email = requestedUser.email;
+
+    if (requestedUser.firstName && requestedUser.firstName.length >= USERS_CONSTANTS.realNameMinLen
+        && requestedUser.firstName.length <= USERS_CONSTANTS.realNameMaxLen) {
+        updateUser.firstName = requestedUser.firstName;
+    }
+
+    if (requestedUser.lastName && requestedUser.lastName.length >= USERS_CONSTANTS.realNameMinLen
+        && requestedUser.lastName.length <= USERS_CONSTANTS.realNameMaxLen) {
+        updateUser.lastName = requestedUser.lastName;
+    }
+
+    User.update({ _id: req.user._id }, updateUser, function (err) {
+        if (err) {
+            err.status = 400;
+            err.message = 'Bad request';
+            next(err);
+            return;
+        }
+
+       res.redirect('/users/profile');
+    });
+}
+
 function getUser(req, res, next) {
     if (!req.query.name) {
         next({ status: 400 });
@@ -135,5 +181,7 @@ module.exports = {
     register: register,
     getLoginView: getLoginView,
     getProfileView: getProfileView,
+    getProfileEditView: getProfileEditView,
+    editProfile: editProfile,
     getUser: getUser
 };

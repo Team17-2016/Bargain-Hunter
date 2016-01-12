@@ -13,6 +13,8 @@ module.exports = function(app, express) {
         .post('/login', auth.login)
         .post('/logout', connectEnsureLogin.ensureLoggedIn('/'), auth.logout)
         .get('/profile', connectEnsureLogin.ensureLoggedIn('/users/login'), controller.getProfileView)
+        .get('/profile/edit', connectEnsureLogin.ensureLoggedIn('/users/login'),controller.getProfileEditView)
+        .post('/profile/edit', connectEnsureLogin.ensureLoggedIn('/users/login'), controller.editProfile)
         .get('/', controller.getUser);
 
     app.use('/users', router);

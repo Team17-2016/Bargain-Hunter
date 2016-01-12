@@ -4,6 +4,7 @@ let mongoose = require('mongoose'),
     encryption = require('./../utilities/encryption'),
     USERS_CONSTANTS = require('./../utilities/constants').USERS;
 
+// TODO length does not work
 let schema = new mongoose.Schema({
     username: {
         type: String,
@@ -50,9 +51,6 @@ let schema = new mongoose.Schema({
         type: String,
         minlength: USERS_CONSTANTS.realNameMinLen,
         maxlength: USERS_CONSTANTS.realNameMaxLen
-    },
-    phone: {
-        type: String
     }
 });
 
