@@ -17,18 +17,18 @@ block content
                         label(for="username" class="col-lg-4 control-label")
                             | Username
                         div(class="col-lg-8")
-                            input(type="text" class="form-control" name="username" id="username" placeholder="Username" required="required" ng-change="vm.checkIfUsernameExists()" ng-model="vm.user.username")
+                            input(type="text" class="form-control" name="username" id="username" placeholder="Username(min length: 4, max length: 20)" required="required" ng-minlength=4 ng-maxlength=20 ng-change="vm.checkIfUsernameExists()" ng-model="vm.user.username")
                             span(class="text-danger" ng-if="vm.usernameExists") Username already exists.
                     div(class="form-group")
                         label(for="password" class="col-lg-4 control-label")
                             | Password
                         div(class="col-lg-8")
-                            input(type="password" class="form-control" name="password" id="password" placeholder="Password" required="required" ng-model="vm.user.password")
+                            input(type="password" class="form-control" name="password" id="password" placeholder="Password(min length: 6)" required="required" ng-minlength=6 ng-model="vm.user.password")
                     div(class="form-group")
                         label(for="confirmPassword" class="col-lg-4 control-label")
                             | Confirm password
                         div(class="col-lg-8")
-                            input(type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Confirm password" required="required" ng-model="vm.user.confirmPassword")
+                            input(type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Confirm password" required="required" ng-minlength=6 ng-model="vm.user.confirmPassword")
                     div(class="form-group")
                         button(type="submit" class="btn btn-danger col-lg-offset-4 col-lg-8" ng-disabled="regForm.$invalid || vm.user.password !== vm.user.confirmPassword || vm.usernameExists")
                             | Register
