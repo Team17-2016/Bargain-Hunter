@@ -54,7 +54,8 @@ let AdSchema = new mongoose.Schema({
     },
     isActive: {
         type: Boolean,
-        required: true
+        required: true,
+        default: true
     },
     owner: {
         type: String,
@@ -63,7 +64,8 @@ let AdSchema = new mongoose.Schema({
     },
     imagePath: {
         type: String,
-        trim: true
+        trim: true,
+        default: 'https://git.reviewboard.kde.org/media/uploaded/files/2015/07/18/a70d8ab6-1bbf-4dcc-b11f-524c2f56b14a__picture_default_cover.jpg'
     },
     comments: [CommentSchema]
 });
