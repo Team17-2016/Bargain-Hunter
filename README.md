@@ -61,6 +61,8 @@ Requirements: https://github.com/TelerikAcademy/Node.js-Course/tree/master/Teamw
 	* POST - add new Advertisement
 * **/ads/:id**
 	* DELETE - delete Advertisement by id
+* **/ads/comment/:id**
+	* POST- add new comment to an Advertisement
 	
 
 ### UI
@@ -75,26 +77,15 @@ Requirements: https://github.com/TelerikAcademy/Node.js-Course/tree/master/Teamw
 
 #### Sample request for ads/ POST: 
 {
-    
-	"title": "New Castle for sale",
-    
-	"description":"A castle build for the royal family of England",
-    
-	"category": "Real estates",
-    
-	"price": 9991200,
-    
-	"isActive": true,
-    
-	"owner": "INKolev",
-    
-	"imagePath": "http://www.stton.co.uk/pict/produits/2_20150304271523.jpg",
-    
-	"comments" : [{
-        
-		"author" : "INKolev",
-        
-		"content" : "Hey that house looks really good, if the offer is still active, I would like to arrange a meeting. Here is my phone number => +3598824124, call me anytime"
-    
-}]
+    "title": "New Castle for sale",
+    "description":"A castle build for the royal family of England",
+    "category": "Real estates",
+    "price": 9991200,
+    "isActive": true,
+    "owner": "INKolev",
+    "imagePath": "http://www.stton.co.uk/pict/produits/2_20150304271523.jpg",
+    "comments" : [{
+        "author" : "INKolev",
+        "content" : "Hey that house looks really good, if the offer is still active, I would like to arrange a meeting. Here is my phone number => +3598824124, call me anytime"
+    }]
 }

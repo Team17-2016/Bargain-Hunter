@@ -1,41 +1,45 @@
 extend main
 
 block content
-    html
-        body
-            form.form-horizontal.col-lg-offset-4.col-lg-4
-                fieldset
-                    legend Create Advertisement
-                    .form-group
-                        label.col-lg-2.control-label(for='inputTitle') Title
-                        .col-lg-10
-                            input#inputTitle.form-control(type='text', placeholder='Title')
-                    .form-group
-                        label.col-lg-2.control-label(for='inputCategory') Category
-                        .col-lg-10
-                            select#inputCategory.form-control
-                                option(selected="selected") Select category
-                                option Real estate
-                                option Mobile device
-                                option Computers and electronic
-                                option Digital Art
-                                option Traditional Art
-                            br
-                    .form-group
-                        label.col-lg-2.control-label(for='inputPrice') Product Price
-                        .col-lg-10
-                            input#inputPrice.form-control(type='text', placeholder='Product price')
-                    .form-group
-                        label.col-lg-2.control-label(for='inputDescription') Description
-                        .col-lg-10
-                            textarea#inputDescription.form-control(rows='3', placeholder="Detailed description")
-                            span.help-block
-                                | Provide a detailed description for your advertisement. Good descriptions attract more potential clients.
-                    .form-group
-                        label.col-lg-2.control-label(for='inputImageUrl') Image
-                        .col-lg-10
-                            input#inputImageUrl.form-control(type='text', placeholder='Image URL')
-                    .form-group
-                        .col-lg-10.col-lg-offset-2
-                            button.btn.btn-danger.col-lg-6(type='reset') Cancel
-                            button.btn.btn-success.col-lg-6(type='submit') Submit
+    if isAuthenticated
+        form.form-horizontal.col-lg-offset-4.col-lg-4(action="/ads", method="POST")
+            fieldset
+                legend Create Advertisement
+                .form-group
+                    label.col-lg-2.control-label(for='inputTitle') Title
+                    .col-lg-10
+                        input#inputTitle.form-control(type='text', placeholder='Title', name="title")
+                .form-group
+                    label.col-lg-2.control-label(for='inputCategory') Category
+                    .col-lg-10
+                        select#inputCategory.form-control(name="category")
+                            option(selected="selected") Select category
+                            option Real estate
+                            option Mobile device
+                            option Computers and electronic
+                            option Digital Art
+                            option Traditional Art
+                        br
+                .form-group
+                    label.col-lg-2.control-label(for='inputPrice') Product Price
+                    .col-lg-10
+                        input#inputPrice.form-control(type='text', placeholder='Product price', name="price")
+                .form-group
+                    label.col-lg-2.control-label(for='inputDescription') Description
+                    .col-lg-10
+                        textarea#inputDescription.form-control(rows='3', placeholder="Detailed description", name="description")
+                        span.help-block
+                            | Provide a detailed description for your advertisement.
+                            | Good descriptions attract more potential clients.
+                .form-group
+                    label.col-lg-2.control-label(for='inputImageUrl') Image
+                    .col-lg-10
+                        input#inputImageUrl.form-control(type='text', placeholder='Image URL', name="imageUrl")
+                .form-group
+                    .col-lg-10.col-lg-offset-2
+                        button.btn.btn-danger.col-lg-6(type='reset') Cancel
+                        button.btn.btn-success.col-lg-6(type='submit') Submit
+    else
+        .jumbotron.text-center
+            h1
+                | Unauthorized!
