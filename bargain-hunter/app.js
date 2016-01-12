@@ -58,5 +58,5 @@ app.listen(PORT, function (err) {
         return;
     }
 
-    console.log(`Server running at localhost:${PORT}`);
+    console.log('Server running at localhost:${PORT}');
 });
