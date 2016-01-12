@@ -9,7 +9,6 @@ Requirements: https://github.com/TelerikAcademy/Node.js-Course/tree/master/Teamw
 	* _id - auto-generated from db 
 	* username - String required
 	* password - String required
-	* token - String auto-generated
 	* rating- { votesCount: Number, votesSum: Number } => Average rating can be saved in a virtual property calculated by the formula (AverageRating = votesSum/votesCount)
 	* offers - array of offers created by the user
 	* favourites - array of offers watched by the user (?good to have?)
@@ -39,24 +38,63 @@ Requirements: https://github.com/TelerikAcademy/Node.js-Course/tree/master/Teamw
 
 ### Server routes
 
-* **api/users/register**
+* **/users/register - done**
 	* GET - register form
 	* POST - register user
-* **api/users/login**
+* **/users/login - done**
 	* GET - login form
 	* POST - login user	
-* **api/users/logout** 	
-	* POST - to delete token ?
-* **api/users/profile**
+* **/users/logout** 	
+	* POST
+* **/users/profile**
 	* GET - personal user info
-	* POST/PUT - update profile
-* **api/users**
+	* PUT - update profile
+* **/users**
 	* GET - all, without details
-* **api/users/:id**
+* **/users/:id**
 	* GET - user details
+* **/ads/**
+	* GET - all ads with brief description
+* **/ads/:id**
+	* GET - single ad with detailed description
+* **/ads/**
+	* POST - add new Advertisement
+* **/ads/:id**
+	* DELETE - delete Advertisement by id
 	
 
 ### UI
-* Bootstrap?
+* Bootstrap
+ 
+### TODO
+* bower should be used for client side
+* js (Angular) for the logout to be fully working
+* ...
 
 #### Feel free to make changes and add suggestions :)
+
+#### Sample request for ads/ POST: 
+{
+    
+	"title": "New Castle for sale",
+    
+	"description":"A castle build for the royal family of England",
+    
+	"category": "Real estates",
+    
+	"price": 9991200,
+    
+	"isActive": true,
+    
+	"owner": "INKolev",
+    
+	"imagePath": "http://www.stton.co.uk/pict/produits/2_20150304271523.jpg",
+    
+	"comments" : [{
+        
+		"author" : "INKolev",
+        
+		"content" : "Hey that house looks really good, if the offer is still active, I would like to arrange a meeting. Here is my phone number => +3598824124, call me anytime"
+    
+}]
+}

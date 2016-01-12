@@ -1,0 +1,40 @@
+extend main
+
+block content
+    .container
+        .row
+            h1(class="col-lg-8") Profile
+        .row
+            .row
+                .col-lg-8
+                    strong Username:&nbsp;
+                    span #{user.username}
+            .row
+                .col-lg-8
+                    strong Rating:&nbsp;
+                    span #{user.rating}
+            .row
+                .col-lg-8
+                    strong First Name:&nbsp;
+                    if (user.firstName)
+                        span #{user.firstName}
+            .row
+                .col-lg-8
+                    strong Last Name:&nbsp;
+                    if (user.lastName)
+                        span #{user.lastName}
+            .row
+                .col-lg-8
+                    strong Phone:&nbsp;
+                    if (user.phone)
+                        span #{user.phone}
+            .row
+                .col-lg-8
+                    strong E-mail:&nbsp;
+                    if (user.email)
+                        span #{user.email}
+            .row
+                .col-lg-8
+                    strong Area:&nbsp;
+                    if (user.area)
+                        span #{user.area}

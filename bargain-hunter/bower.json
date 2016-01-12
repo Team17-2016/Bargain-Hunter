@@ -1,0 +1,22 @@
+{
+  "name": "bargain-hunter",
+  "version": "0.0.0",
+  "homepage": "https://github.com/Team17-2016/Bargain-Hunter",
+  "authors": [
+    "team17"
+  ],
+  "description": "teamwork project for Telerik Academy",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.8",
+    "bootstrap": "~3.3.6",
+    "jquery": "~2.2.0"
+  }
+}
