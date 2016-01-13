@@ -48,6 +48,10 @@ html(lang='en')
                                     li
                                         a(href="/users/profile/edit")
                                             | Edit profile
+                                    if(isAuthorized)
+                                        li
+                                            a(href="/admin/users")
+                                                | Admin - Users
                                     li(class="divider")
                                     li
                                         a(href="", ng-click="mc.logout()")
