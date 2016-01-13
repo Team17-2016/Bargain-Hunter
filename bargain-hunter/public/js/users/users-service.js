@@ -5,8 +5,8 @@
         .factory('usersService', ['dataService', usersService]);
 
     function usersService(dataService) {
-        function getUserByName(url) {
-            return dataService.get(url);
+        function getUserByName(name) {
+            return dataService.get('/users?name=' + name);
         }
 
         return {

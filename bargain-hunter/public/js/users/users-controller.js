@@ -10,7 +10,7 @@
         vm.usernameExists = false;
 
         vm.checkIfUsernameExists = function () {
-            usersService.getUserByName('/users?name=' + vm.user.username)
+            usersService.getUserByName(vm.user.username)
                 .then(function (data) {
                     if (data.username) {
                         vm.usernameExists = true;
