@@ -1,5 +1,5 @@
 var request = require('supertest');
-describe('loading express', function () {
+describe('Basic routes tests', function () {
     var server;
     /*beforeEach(function (done) {
         server = require('../app');
@@ -9,6 +9,7 @@ describe('loading express', function () {
         server = require('../app');
         done();
     });
+    //can't close the server
     /*afterEach(function (done) {
         //server.close();
         server = null;
@@ -20,7 +21,7 @@ describe('loading express', function () {
             .expect(200, done);
         done();
     });
-    it('404 on invalid address', function testPath(done) {
+    it('status 404 on invalid address', function testPath(done) {
         request(server)
             .get('/foo/bar')
             .expect(404, done);
