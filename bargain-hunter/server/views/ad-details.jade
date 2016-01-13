@@ -22,7 +22,7 @@ block content
             =ad.price
                 | $
         if(isAuthenticated)
-            button.btn.btn-info.btn-lg.pull-left(type='button', data-toggle='modal', data-target='#myModal') Add comment
+            button.btn.btn-success.pull-left.btn-comment(type='button', data-toggle='modal', data-target='#myModal') Add comment
             form.form-horizontal.col-lg-offset-4.col-lg-4(action="/ads/comment/" + ad.id, method="POST")
                 .modal(id="myModal")
                     .modal-dialog
