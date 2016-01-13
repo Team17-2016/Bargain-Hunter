@@ -22,6 +22,7 @@ describe('User routes tests', function () {
         it('Profile page without authentication redirects to login page', function testSlash(done) {
             request(url)
                 .get('/users/profile')
+                .expect('Location', '/users/login')
                 .expect(302, done);
         });
     });
