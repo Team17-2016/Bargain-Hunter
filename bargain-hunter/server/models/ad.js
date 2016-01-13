@@ -28,8 +28,7 @@ let CommentSchema = new mongoose.Schema({
         required: true
     },
     publishDate: {
-        type: Date,
-        default: new Date()
+        type: String
     }
 });
 

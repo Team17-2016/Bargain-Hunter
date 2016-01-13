@@ -3,7 +3,8 @@
 let mongoose = require('mongoose'),
     Ad = mongoose.model('Ad'),
     Comment = mongoose.model('Comment'),
-    Owner = mongoose.model('Owner');
+    Owner = mongoose.model('Owner'),
+    moment = require('moment');
 
 const DEFAULT_ADS_FILTER_OPTIONS = {isActive: true};
 
@@ -124,50 +125,32 @@ function removeAdvertisementById(req, res, next) {
 
 function commentAdvertisement(req, res, next) {
     let advertisementId = req.params.id;
-    let comment = new Comment(req.body);
+    let commentBody = {
+        author: req.user.username,
+        content: req.body.comment,
+        publishDate: moment().format('MMMM Do YYYY, h:mm:ss A')
+    };
 
-    Ad.findById(advertisementId, function(err, advertisement) {
-        if(err) {
-            next(err);
-            return;
+    let comment = new Comment(commentBody);
+
+    let query = { _id: advertisementId };
+    let update = {
+        $push: {
+            comments: comment
         }
+    };
 
-        if(!advertisement) {
+    let options = {};
+    Ad.findOneAndUpdate(query, update, options, function(err, ad) {
+        if(err) {
             res.status(404).json({
                 result: {
-                    message: 'Advertisement with the provided ID does not exist.'
+                    message: 'Comment insertion failed.'
                 }
-            });
-
-            return;
+            })
         }
 
-        let advertisementCopy = getCopy(advertisement);
-
-        advertisement.remove(function(err) {
-            if(err) {
-                next(err);
-                return;
-            }
-
-            advertisementCopy.comments.push(comment);
-            console.log('Advertisement copy');
-            console.log(advertisementCopy);
-
-            let updatedAdvertisement = new Ad(advertisementCopy);
-
-            updatedAdvertisement.save(function(err){
-                if(err){
-                    next(err);
-                } else {
-                    res.status(210).json({
-                        result: {
-                            message: 'Comment successfully added.'
-                        }
-                    });
-                }
-            });
-        })
+        res.redirect('/ads/'+ad._id);
     });
 }
 

@@ -18,24 +18,41 @@ block content
                 | /5
         h2
             strong
-                | Price:
-        h3
-            p=ad.price
+                | Price:&nbsp;
+            =ad.price
                 | $
-        h2
-            strong
-                | Description:
-        h3
-            p=ad.description
-
+        if(isAuthenticated)
+            button.btn.btn-info.btn-lg.pull-left(type='button', data-toggle='modal', data-target='#myModal') Add comment
+            form.form-horizontal.col-lg-offset-4.col-lg-4(action="/ads/comment/" + ad.id, method="POST")
+                .modal(id="myModal")
+                    .modal-dialog
+                        .modal-content
+                            .modal-header
+                                h4.modal-title Modal title
+                            .modal-body
+                                textarea#inputComment.form-control(rows='3', placeholder="Comment...", name="comment")
+                            .modal-footer
+                                button.btn.btn-default(type='button', data-dismiss='modal') Close
+                                button.btn.btn-primary(type='submit') Post
+    h2.comment.text-center
+        strong
+            | Description:
+    h3.comment.text-center
+        p=ad.description
+    hr
     h2.comment.text-center
         strong
             | Comments
     each comment in ad.comments
-        div.comment.col-lg-offset-3.col-lg-6
-            h5.col-lg-3
-                strong=comment.author
-            h5.col-lg-offset-4.col-lg-5
-                | Published on:&nbsp;
-                =comment.publishDate
-            p=comment.content
+        .comment.col-lg-offset-3.col-lg-6
+            div.comment-header
+                h5.col-lg-3
+                    strong
+                        | Author:&nbsp;
+                    =comment.author
+                h5.col-lg-offset-4.col-lg-5
+                    strong
+                        | Published on:&nbsp;
+                    =comment.publishDate
+            div.text-center
+                p=comment.content

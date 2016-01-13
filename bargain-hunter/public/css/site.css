@@ -23,3 +23,8 @@ footer {
 .comment {
     clear: both;
 }
+
+.comment-header {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
