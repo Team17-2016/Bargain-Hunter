@@ -1,6 +1,8 @@
+var should = require('should');
 var request = require('supertest');
 describe('Basic routes tests', function () {
     var server;
+    var url = 'http://localhost:65442';
     /*beforeEach(function (done) {
         server = require('../app');
         done();
@@ -16,15 +18,13 @@ describe('Basic routes tests', function () {
         done();
     });*/
     it('responds to /', function testSlash(done) {
-        request(server)
+        request(url)
             .get('/')
             .expect(200, done);
-        done();
     });
     it('status 404 on invalid address', function testPath(done) {
-        request(server)
+        request(url)
             .get('/foo/bar')
             .expect(404, done);
-        done();
     });
 });
