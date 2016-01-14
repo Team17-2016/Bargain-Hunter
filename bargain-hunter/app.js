@@ -46,6 +46,10 @@ function makeServer() {
     // Setup routers
     require('./server/routers')(app, express);
 
+    app.get('*', function(req, res){
+        res.redirect('home');
+    });
+
     // Middleware for last-resort error-handling
     app.use(function (err, req, res, next) {
         if (err) {
