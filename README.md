@@ -4,7 +4,9 @@ Telerik Academy Team Project
 Requirements: https://github.com/TelerikAcademy/Node.js-Course/tree/master/Teamwork
 
 ## Project Description
-    * Bargain Hunter is a place where consumers can sell items to other consumers and buy from them. Registered users can post advertisments and leave comments to other people ads. Visitors can only read the advertisments.
+    * Bargain Hunter is a place where consumers can sell items to other consumers and buy from them. 
+    * Registered users can post advertisments and leave comments to other people ads. 
+    * Visitors can only read the advertisments.
 
 ### Routes
 
