@@ -13,7 +13,7 @@ describe('User routes tests', function () {
                     .get('/users/login');
             })
         })
-        /*describe('Public part', function () {
+        describe('Public part', function () {
             it('Rsepond 200 OK on login page', function (done) {
                 request(url)
                     .get('/users/login')
@@ -24,7 +24,7 @@ describe('User routes tests', function () {
                     .get('/users/register')
                     .expect(200, done);
             });
-        });*/
+        });
     describe('Private part', function () {
         it('Profile page without authentication redirects to login page', function testSlash(done) {
             request(url)
