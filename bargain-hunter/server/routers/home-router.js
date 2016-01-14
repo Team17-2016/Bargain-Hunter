@@ -4,13 +4,7 @@ module.exports = function(app, express) {
     let router = express.Router();
 
     router.get('/', function(req, res) {
-        console.log('Called Home route');
-        console.log(`---req user----${req.user}`);
-        let isAuthenticated = false;
-
-        if(req.user) {
-            isAuthenticated = true;
-        }
+        let isAuthenticated = req.user || false;
 
         res.render('home', { isAuthenticated: isAuthenticated });
     });

@@ -1,0 +1,58 @@
+extend main
+
+block content
+    div(class="col-lg-offset-3 col-lg-6")
+        h1.text-center
+            strong=ad.title
+        img.advertisement-image(src=ad.imageUrl)
+        hr
+    div.col-lg-3
+        h2
+            strong
+                | Owner:&nbsp;
+            =ad.owner.username
+        h2
+            strong
+                | Rating:&nbsp;
+            =ad.owner.rating
+                | /5
+        h2
+            strong
+                | Price:&nbsp;
+            =ad.price
+                | $
+        if(isAuthenticated)
+            button.btn.btn-success.pull-left.btn-comment(type='button', data-toggle='modal', data-target='#myModal') Add comment
+            form.form-horizontal.col-lg-offset-4.col-lg-4(action="/ads/comment/" + ad.id, method="POST")
+                .modal(id="myModal")
+                    .modal-dialog
+                        .modal-content
+                            .modal-header
+                                h4.modal-title Modal title
+                            .modal-body
+                                textarea#inputComment.form-control(rows='3', placeholder="Comment...", name="comment")
+                            .modal-footer
+                                button.btn.btn-default(type='button', data-dismiss='modal') Close
+                                button.btn.btn-primary(type='submit') Post
+    h2.comment.text-center
+        strong
+            | Description:
+    h3.comment.text-center
+        p=ad.description
+    hr
+    h2.comment.text-center
+        strong
+            | Comments
+    each comment in ad.comments
+        .comment.col-lg-offset-3.col-lg-6
+            div.comment-header
+                h5.col-lg-3
+                    strong
+                        | Author:&nbsp;
+                    =comment.author
+                h5.col-lg-offset-4.col-lg-5
+                    strong
+                        | Published on:&nbsp;
+                    =comment.publishDate
+            div.text-center
+                p=comment.content

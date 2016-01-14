@@ -3,6 +3,19 @@
 let mongoose = require('mongoose');
 let thirtyDaysInMilliseconds = 30*24*60*60*1000;
 
+let OwnerSchema = new mongoose.Schema({
+    username: {
+        type: String,
+        trim: true,
+        required: true
+    },
+    rating: {
+        type: Number,
+        required: true,
+        default: 0
+    }
+});
+
 let CommentSchema = new mongoose.Schema({
     author: {
         type: String,
@@ -15,9 +28,7 @@ let CommentSchema = new mongoose.Schema({
         required: true
     },
     publishDate: {
-        type: Date,
-        required: true,
-        default: Date.now
+        type: String
     }
 });
 
@@ -45,7 +56,7 @@ let AdSchema = new mongoose.Schema({
     publishDate: {
         type: Date,
         required: true,
-        default: Date.now
+        default: new Date()
     },
     expireDate: {
         type: Date,
@@ -57,12 +68,8 @@ let AdSchema = new mongoose.Schema({
         required: true,
         default: true
     },
-    owner: {
-        type: String,
-        trim: true,
-        required: true
-    },
-    imagePath: {
+    owner: OwnerSchema,
+    imageUrl: {
         type: String,
         trim: true,
         default: 'https://git.reviewboard.kde.org/media/uploaded/files/2015/07/18/a70d8ab6-1bbf-4dcc-b11f-524c2f56b14a__picture_default_cover.jpg'
@@ -72,10 +79,12 @@ let AdSchema = new mongoose.Schema({
 
 let Ad = mongoose.model('Ad', AdSchema);
 let Comment = mongoose.model('Comment', CommentSchema);
+let Owner = mongoose.model('Owner', OwnerSchema);
 
 module.exports = function() {
     return {
         Ad: Ad,
-        Comment: Comment
+        Comment: Comment,
+        Owner: Owner
     }
 };

@@ -2,15 +2,15 @@
     'use strict';
 
     angular.module('bargainHunterApp.controllers')
-        .controller('UsersController', ['usersService', UsersController]);
+        .controller('AdsController', ['adsService', AdsController]);
 
-    function UsersController(usersService) {
+    function AdsController(adsService) {
         var vm = this;
 
         vm.usernameExists = false;
 
         vm.checkIfUsernameExists = function () {
-            usersService.getUserByName(vm.user.username)
+            usersService.getUserByName('/users?name=' + vm.user.username)
                 .then(function (data) {
                     if (data.username) {
                         vm.usernameExists = true;
