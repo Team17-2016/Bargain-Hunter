@@ -27,8 +27,10 @@ function getAllAds(req, res, next) {
             return;
         }
 
+        let isAuthorized = (req.user && req.user.isAdmin) || false;
         let data = {
             isAuthenticated: req.user,
+            isAuthorized: isAuthorized,
             ads: advertisements
         };
 

@@ -58,10 +58,6 @@ function makeServer() {
                     message: err.message || 'Something went wrong and we will blame you :)'
                 }
             });
-            /*res.status(err.status || 500)
-                .json({
-                    message: err.message
-                });*/
         }
     });
 
