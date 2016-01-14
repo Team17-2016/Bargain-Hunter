@@ -21,22 +21,19 @@ function getAllAds(req, res, next) {
             return;
         }
 
-        if(!advertisements) {
-            res.status(404).json({
-                result: {
-                    message: 'No advertisements found.'
-                }
-            });
-
-            return;
-        }
-
         let isAuthorized = (req.user && req.user.isAdmin) || false;
         let data = {
             isAuthenticated: req.user,
             isAuthorized: isAuthorized,
             ads: advertisements
         };
+
+        if(!advertisements || advertisements.length === 0) {
+
+            res.status(404).render('all-ads', data);
+
+            return;
+        }
 
         res.render('all-ads', data);
     })
