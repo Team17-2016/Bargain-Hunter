@@ -11,8 +11,10 @@ module.exports = function(app, express) {
         .post('/register', controller.register)
         .get('/login', controller.getLoginView)
         .post('/login', auth.login)
-        .post('/logout', auth.logout)
+        .post('/logout', connectEnsureLogin.ensureLoggedIn('/'), auth.logout)
         .get('/profile', connectEnsureLogin.ensureLoggedIn('/users/login'), controller.getProfileView)
+        .get('/profile/edit', connectEnsureLogin.ensureLoggedIn('/users/login'),controller.getProfileEditView)
+        .post('/profile/edit', connectEnsureLogin.ensureLoggedIn('/users/login'), controller.editProfile)
         .get('/', controller.getUser);
 
     app.use('/users', router);

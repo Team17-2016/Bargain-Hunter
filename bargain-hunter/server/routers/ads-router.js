@@ -7,16 +7,11 @@ module.exports = function(app, express) {
         connectEnsureLogin = require('connect-ensure-login');
 
     router.get('/', controller.getAllAdsByFilter)
-        .get('/create', function(req,res) {
-            console.log(req.user);
-            let isAuthenticated = req.user || false;
-
-            res.render('post-advertisement', {isAuthenticated:isAuthenticated });
-        })
+        .get('/create', controller.createAdvertisement)
+        .post('/', connectEnsureLogin.ensureLoggedIn('/users/login'), controller.postAdvertisement)
         .get('/:id',controller.getAdvertisementById)
-        .delete('/:id', connectEnsureLogin.ensureLoggedIn('users/login'), controller.removeAdvertisement)
-        .post('/', connectEnsureLogin.ensureLoggedIn('/users/login'), controller.postAdvertisement);
-
+        .post('/comment/:id',controller.commentAdvertisement)
+        .delete('/:id', connectEnsureLogin.ensureLoggedIn('users/login'), controller.removeAdvertisement);
 
     app.use('/ads', router);
 };

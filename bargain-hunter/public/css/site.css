@@ -1,4 +1,38 @@
+.empty-space {
+    height: 5vh;
+}
+
 footer {
     clear: both;
 }
 
+.advertisement-brief {
+    width: 20vw;
+    height: 25vh;
+    display: inline-block;
+    margin-left: 3%;
+    margin-right: 1%;
+    margin-bottom: 4%;
+}
+
+.advertisement-image {
+    width: 100%;
+    height: 100%;
+}
+
+.advertisement-image-big {
+    width: 50vw;
+}
+
+.comment {
+    clear: both;
+}
+
+.comment-header {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.btn-comment {
+    width: 180px;
+}
