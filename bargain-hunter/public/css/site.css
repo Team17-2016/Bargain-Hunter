@@ -1,5 +1,5 @@
 .empty-space {
-    height: 5vh;
+    height: 7vh;
 }
 
 footer {
@@ -22,6 +22,10 @@ footer {
 
 .advertisement-image-big {
     width: 50vw;
+}
+
+.clearfix {
+    clear:both;
 }
 
 .comment {

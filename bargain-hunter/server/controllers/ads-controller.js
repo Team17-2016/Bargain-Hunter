@@ -9,7 +9,11 @@ let mongoose = require('mongoose'),
 const DEFAULT_ADS_FILTER_OPTIONS = {isActive: true};
 
 function getAllAds(req, res, next) {
-    let filterOptions = req.body.filterOptions || DEFAULT_ADS_FILTER_OPTIONS;
+    let filterOptions = {};
+
+    if(req.query.category) {
+        filterOptions.category = req.query.category;
+    }
 
     Ad.find(filterOptions, function(err, advertisements) {
         if(err) {

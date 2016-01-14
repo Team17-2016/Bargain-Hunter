@@ -1,8 +1,30 @@
 extend main
 
 block content
+    div.clearfix
+        form.form-horizontal.col-lg-offset-4.col-lg-4(action="/ads", method="GET")
+            fieldset
+                legend Filter by:
+                .form-group
+                    label.col-lg-2.control-label(for='inputCategory') Category
+                    .col-lg-10
+                        select#inputCategory.form-control(name="category")
+                            option(selected="selected") Select category
+                            option Real estate
+                            option Mobile device
+                            option Computers and electronics
+                            option Digital Art
+                            option Traditional Art
+                            option Animals
+                            option Trinkets
+                            option Cars
+                        br
+                .form-group
+                    .col-lg-10.col-lg-offset-2
+                        button.btn.btn-success.col-lg-12(type='submit') Search
+    hr
     each ad in ads
-        div(class="advertisement-brief")
+        div.advertisement-brief
             h2.text-center
                 strong=ad.title
             a(href="/ads/"+ad.id)
