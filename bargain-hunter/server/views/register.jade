@@ -1,6 +1,9 @@
 extend main
 
 block content
+    br
+    br
+    br
     div(class="panel panel-danger col-lg-offset-4 col-lg-4", ng-controller="UsersController as vm")
         div(class="panel-heading")
             h3(class="panel-title text-center")
@@ -9,25 +12,25 @@ block content
             form(class="form-horizontal", method="post", action="/users/register", name="regForm")
                 fieldset
                     div(class="form-group")
-                        label(for="email" class="col-lg-4 control-label")
+                        label(for="email" class="col-lg-3 control-label")
                             | Email
-                        div(class="col-lg-8")
+                        div(class="col-lg-9")
                             input(type="email" class="form-control" name="email" id="email" placeholder="Email" required="required" ng-model="vm.user.email")
                     div(class="form-group")
-                        label(for="username" class="col-lg-4 control-label")
+                        label(for="username" class="col-lg-3 control-label")
                             | Username
-                        div(class="col-lg-8")
+                        div(class="col-lg-9")
                             input(type="text" class="form-control" name="username" id="username" placeholder="Username(min length: 4, max length: 20)" required="required" ng-minlength=4 ng-maxlength=20 ng-change="vm.checkIfUsernameExists()" ng-model="vm.user.username")
                             span(class="text-danger" ng-if="vm.usernameExists") Username already exists.
                     div(class="form-group")
-                        label(for="password" class="col-lg-4 control-label")
+                        label(for="password" class="col-lg-3 control-label")
                             | Password
-                        div(class="col-lg-8")
+                        div(class="col-lg-9")
                             input(type="password" class="form-control" name="password" id="password" placeholder="Password(min length: 6)" required="required" ng-minlength=6 ng-model="vm.user.password")
                     div(class="form-group")
-                        label(for="confirmPassword" class="col-lg-4 control-label")
+                        label(for="confirmPassword" class="col-lg-3 control-label")
                             | Confirm password
-                        div(class="col-lg-8")
+                        div(class="col-lg-9")
                             input(type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Confirm password" required="required" ng-minlength=6 ng-model="vm.user.confirmPassword")
                     div(class="form-group")
                         button(type="submit" class="btn btn-danger col-lg-offset-4 col-lg-8" ng-disabled="regForm.$invalid || vm.user.password !== vm.user.confirmPassword || vm.usernameExists")
