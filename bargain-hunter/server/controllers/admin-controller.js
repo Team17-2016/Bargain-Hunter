@@ -31,6 +31,7 @@ function getAllUsers(req, res, next) {
     page *= 1;
 
     User.find()
+        .select('_id username email isAdmin')
         .sort(wantedSort)
         .limit(pageSize)
         .skip((page - 1) * pageSize)
