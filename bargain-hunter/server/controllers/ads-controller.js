@@ -195,6 +195,10 @@ function extractStatistics(advertisements) {
     let i = 0;
     let length = advertisements.length;
 
+    if(length < 1) {
+        return;
+    }
+
     let stats = {};
 
     for(i=0; i<length; i++) {
