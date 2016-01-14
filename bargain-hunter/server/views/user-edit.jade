@@ -1,0 +1,46 @@
+extend main
+
+block content
+    .container(ng-controller="AdminUsersEditController as vm")
+        .row
+            h1(class="col-lg-8") Edit user
+        .row
+            button(class="button" ng-click="vm.promote()") Promote To Admin
+        .row
+            button(class="button" ng-click="vm.deleteUser()") Delete
+        .row
+            .row
+                .col-lg-8
+                    strong Username:&nbsp;
+                    span #{user.username}
+            .row
+                .col-lg-8
+                    strong Admin:&nbsp;
+                    span #{user.isAdmin}
+            .row
+                .col-lg-8
+                    strong Rating:&nbsp;
+                    span #{user.rating}
+            .row
+                .col-lg-8
+                    strong First Name:&nbsp;
+                    if (user.firstName)
+                        span #{user.firstName}
+            .row
+                .col-lg-8
+                    strong Last Name:&nbsp;
+                    if (user.lastName)
+                        span #{user.lastName}
+            .row
+                .col-lg-8
+                    strong E-mail:&nbsp;
+                    if (user.email)
+                        span #{user.email}
+            .row
+                .col-lg-8
+                    strong Area:&nbsp;
+                    if (user.area)
+                        span #{user.area}
+
+block bottomBodyContent
+    script(src="/public/js/admin/admin-users-edit-controller.js")

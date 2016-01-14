@@ -18,7 +18,7 @@ function makeServer() {
     app.use(logger(LOGGER_FORMAT));
 
     app.use(expressSession({
-        secret: 'coffee',
+        secret: 'coffeeadg1ikl9!tree7whatever39',
         resave: false,
         saveUninitialized: false
     }));
@@ -49,10 +49,15 @@ function makeServer() {
     // Middleware for last-resort error-handling
     app.use(function (err, req, res, next) {
         if (err) {
-            res.status(err.status || 500)
-                .json({
-                    message: err.message
-                });
+            let isAuthorized = (req.user && req.user.isAdmin) || false;
+            res.render('error-page', {
+                isAuthenticated: req.user,
+                isAuthorized: isAuthorized,
+                err: {
+                    status: err.status || 400,
+                    message: err.message || 'Something went wrong and we will blame you :)'
+                }
+            });
         }
     });
 
