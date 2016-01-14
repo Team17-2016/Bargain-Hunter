@@ -50,10 +50,25 @@
             return deferred.promise;
         }
 
+        function deleteRequest(url) {
+            var deferred = $q.defer();
+
+            $http
+                .delete(url)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (err) {
+                    deferred.reject(err);
+                });
+
+            return deferred.promise;
+        }
+
         return {
             get: get,
             post: post,
-            put: put
+            put: put,
+            deleteRequest: deleteRequest
         }
     }
 }());

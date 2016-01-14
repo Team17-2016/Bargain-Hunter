@@ -45,8 +45,17 @@ function isAuthenticated(req, res, next) {
     }
 }
 
+function isAdmin(req, res, next) {
+    if (req.isAuthenticated() && req.user.isAdmin === true) {
+        next();
+    } else {
+        next({status: 403, message: 'Not authorized'});
+    }
+}
+
 module.exports = {
     login: login,
     logout: logout,
-    isAuthenticated: isAuthenticated
+    isAuthenticated: isAuthenticated,
+    isAdmin: isAdmin
 };

@@ -29,6 +29,13 @@ function register(req, res, next) {
     newUser.salt = encryption.generateSalt();
     newUser.passwordHashed = encryption.generateHashedPassword(newUser.salt, req.body.password);
 
+    let isAdmin = false;
+    if (newUser.username === 'DennyGD' || newUser.username === 'InKolev') {
+        isAdmin = true;
+    }
+
+    newUser.isAdmin = isAdmin;
+
     newUser.save(function (err) {
         if (err) {
             err.status = 400;
@@ -69,7 +76,8 @@ function getProfileView(req, res, next) {
 
         res.render('profile', {
             user: user,
-            isAuthenticated: true
+            isAuthenticated: true,
+            isAuthorized: req.user.isAdmin
         });
     });
 }
@@ -77,6 +85,7 @@ function getProfileView(req, res, next) {
 function getProfileEditView(req, res, next) {
     res.render('profile-edit', {
         isAuthenticated: true,
+        isAuthorized: req.user.isAdmin,
         data: {
             email: req.user.email,
             firstName: req.user.firstName
