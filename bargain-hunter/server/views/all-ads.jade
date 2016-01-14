@@ -26,9 +26,10 @@ block content
     if(ads.length < 1)
         h1.text-center.text-danger
             | No advertisements found
-    each ad in ads
-        div.advertisement-brief
-            h2.text-center
-                strong=ad.title
-            a(href="/ads/"+ad.id)
-                img.advertisement-image(src=ad.imageUrl)
+    else
+        each ad in ads
+            div.advertisement-brief
+                h2.text-center
+                    strong=ad.title
+                a(href="/ads/"+ad.id)
+                    img.advertisement-image(src=ad.imageUrl)

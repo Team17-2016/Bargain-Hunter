@@ -165,27 +165,47 @@ function createAdvertisement(req,res, next) {
     res.render('post-advertisement', data);
 }
 
-function getCopy(advertisement) {
-    var copy = {
-        title: advertisement.title,
-        description: advertisement.description,
-        category: advertisement.category,
-        price: advertisement.price,
-        publishDate: advertisement.publishDate,
-        expireDate: advertisement.expireDate,
-        isActive: advertisement.isActive,
-        owner: advertisement.owner,
-        imageUrl: advertisement.imageUrl,
-        comments: []
-    };
+function getStatistics(req, res, next) {
+    let filterOptions = {};
 
-    for(var i = 0; i< advertisement.comments.length; i++) {
-        copy.comments[i].author = advertisement.comments[i].author;
-        copy.comments[i].content = advertisement.comments[i].content;
-        copy.comments[i].publishDate = advertisement.comments[i].publishDate;
+    Ad.find(filterOptions, function(err, advertisements) {
+        let isAuthorized = (req.user && req.user.isAdmin) || false;
+        let data = {
+            isAuthenticated: req.user,
+            isAuthorized: isAuthorized,
+            ads: advertisements,
+            statistics: extractStatistics(advertisements)
+        };
+
+        console.log(data.statistics);
+
+        if(!advertisements || advertisements.length === 0) {
+            res.status(404).render('statistics', data);
+
+            return;
+        }
+
+        res.render('statistics', data);
+    })
+}
+
+function extractStatistics(advertisements) {
+    let i = 0;
+    let length = advertisements.length;
+
+    let stats = {};
+
+    for(i=0; i<length; i++) {
+        var ad = advertisements[i];
+
+        if(!stats[ad.category]) {
+            stats[ad.category]=1;
+        } else {
+            stats[ad.category]++;
+        }
     }
 
-    return copy;
+    return stats;
 }
 
 module.exports = {
@@ -194,5 +214,6 @@ module.exports = {
     postAdvertisement: postAdvertisement,
     removeAdvertisement: removeAdvertisementById,
     createAdvertisement: createAdvertisement,
-    commentAdvertisement: commentAdvertisement
+    commentAdvertisement: commentAdvertisement,
+    getStatistics: getStatistics
 };

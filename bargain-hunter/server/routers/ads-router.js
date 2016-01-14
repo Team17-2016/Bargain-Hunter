@@ -8,6 +8,7 @@ module.exports = function(app, express) {
 
     router.get('/', controller.getAllAdsByFilter)
         .get('/create', controller.createAdvertisement)
+        .get('/statistics', controller.getStatistics)
         .post('/', connectEnsureLogin.ensureLoggedIn('/users/login'), controller.postAdvertisement)
         .get('/:id',controller.getAdvertisementById)
         .post('/comment/:id',controller.commentAdvertisement)

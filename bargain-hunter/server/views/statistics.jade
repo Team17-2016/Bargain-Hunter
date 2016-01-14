@@ -1,0 +1,16 @@
+extend main
+
+block content
+    .col-lg-offset-4.col-lg-4
+        h1
+            | Statistics
+        table.table.table-striped.table-hover
+            thead
+                tr
+                    th Category
+                    th Count
+            tbody
+                each val,stat in statistics
+                    tr
+                        td=stat
+                        td=val
