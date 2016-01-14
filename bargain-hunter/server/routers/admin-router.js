@@ -7,7 +7,10 @@ module.exports = function(app, express) {
 
     router
         .get('/users', controller.getAdminUsersView)
-        .get('/users/all', controller.getAllUsers);
+        .get('/users/all', controller.getAllUsers)
+        .get('/users/edit/:id', controller.getAdminUserEditView)
+        .post('/users/edit/:id', controller.promote)
+        .delete('/users/edit/:id', controller.deleteUser);
 
     app.use('/admin', auth.isAdmin, router);
 };

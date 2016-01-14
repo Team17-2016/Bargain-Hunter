@@ -15,22 +15,31 @@ block content
                     select(class="form-control" ng-model="vm.request.orderType" id="orderType" ng-change="vm.filter()")
                         option(value="asc") Ascending
                         option(value="desc") Descending
+        br
         .row
             table(class="table table-striped table-hover")
                 thead
                 tr(class="active")
                     th Username
                     th Email
-                    th Promote
+                    th Admin
                     th Edit
-                    th Delete
                 tbody
                 tr(ng-repeat="u in vm.users")
                     td {{u.username}}
                     td {{u.email}}
-                    td Promote
-                    td Edit
-                    td Delete
+                    td {{u.isAdmin}}
+                    td
+                        a(href="/admin/users/edit/{{u._id}}") Edit
+        .row
+            .col-lg-4
+                .row
+                    .col-lg-2
+                        button(class="btn btn-primary" type="button" ng-click="vm.updatePage(-1)") &lt;
+                    .col-lg-3
+                        input(type="number" class="form-control" ng-model="vm.request.page" ng-change="vm.filter()")
+                    .col-lg-2
+                        button(class="btn btn-primary" type="button" ng-click="vm.updatePage(1)") &gt;
 
 block bottomBodyContent
     script(src="/public/js/admin/admin-users-controller.js")
