@@ -1,8 +1,9 @@
 describe('Users controller tests', function () {
-    require('../server/models')
-        //TODO: mock mongoose
+    require('../server/models');
+    //TODO: mock mongoose
     var mongoose = require('mongoose'),
-        db = require('./test-db'),
+        db,
+        User,
         controller = require('../server/controllers/users-controller'),
         expect = require('chai').expect;
 
@@ -76,25 +77,35 @@ describe('Users controller tests', function () {
     beforeEach(function () {
         error = {
             ststus: undefined
-        }
+        };
 
         //done();
     });
 
     before(function (done) {
-        function clearDB() {
-            for (var i in mongoose.connection.collections) {
-                mongoose.connection.collections[i].remove(function () {});
+        mongoose.disconnect(function () {
+            db = require('./test-db');
+            User = mongoose.model('User');
+
+            function clearDB() {
+                for (var i in mongoose.connection.collections) {
+                    mongoose.connection.collections[i].remove(function () {});
+
+                    //console.log(i);
+                }
+
             }
+
+            if (mongoose.connection.readyState === 0) {
+                db.init();
+            } else {
+                return clearDB();
+            }
+
+            console.log('database: ' + User.db.name);
             return done();
-        }
 
-        if (mongoose.connection.readyState === 0) {
-            db.init();
-        } else {
-            return clearDB();
-        }
-
+        });
     });
 
 
@@ -112,7 +123,6 @@ describe('Users controller tests', function () {
 
             controller.register(req, res, next);
 
-            User = mongoose.model('User');
             expect(error.status).eql(undefined);
             expect(!!User.findOne({
                 username: req.body.name
@@ -218,7 +228,44 @@ describe('Users controller tests', function () {
         });
     });
 
-    describe('Edit profile', function () {
+    /*describe('Edit profile', function () {
+        it('Edit with valid user should change the profile', function (done) {
+            var req = {
+                body: accounts.valid,
+                user: {
+                    id: undefined
+                }
+            };
 
-    })
+            // TODO: MOCK MONGOOOSE!!!!!!!!!!!!!!!!!!
+            var userId;
+            User.findOne().exec(function (err, dbUser) {
+                userId = dbUser._id;
+
+                //console.log(userId);
+
+                req.user._id = userId;
+
+                req.body.username = "changeUserName";
+
+                controller.editProfile(req, res, next);
+
+                expect(error.status).eql(undefined);
+
+                var changed = User.findOne({
+                    _id: req.user._id
+                }, function (err, dbUser) {
+                    expect(err).eqls(null);
+                    //console.log(dbUser.username);
+                    expect(dbUser.username).eql(req.body.username);
+                    done();
+                    return dbUser;
+                });
+
+                //console.log(changed);
+            });
+
+
+        });
+    });*/
 });

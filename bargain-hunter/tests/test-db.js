@@ -2,6 +2,8 @@
 
 let mongoose = require('mongoose');
 
+var collectionName='bargainHunterTest';
+
 function init() {
     mongoose.connect('localhost:27017/bargainHunterTest');
     let db = mongoose.connection;
@@ -13,8 +15,11 @@ function init() {
     db.once('open', function () {
         console.log('Db connection has been established.');
     });
+
+    return db;
 }
 
 module.exports = {
-    init: init
+    init: init,
+    collectionName:collectionName
 };
