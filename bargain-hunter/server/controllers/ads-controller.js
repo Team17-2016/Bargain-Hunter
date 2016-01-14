@@ -58,8 +58,10 @@ function getAdvertisementById(req, res, next) {
             return;
         }
 
+        let isAuthorized = (req.user && req.user.isAdmin) || false;
         let data = {
             isAuthenticated: req.user,
+            isAuthorized: isAuthorized,
             ad: advertisement
         };
 
