@@ -1,7 +1,7 @@
 function makeServer() {
     'use strict';
 
-    const PORT = 65442,
+    const PORT = process.env.PORT || 65442,
         LOGGER_FORMAT = 'combined';
 
     let express = require('express'),
