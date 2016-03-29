@@ -3,7 +3,7 @@
 let mongoose = require('mongoose');
 
 function init() {
-    mongoose.connect('localhost:27017/bargainHunter');
+    mongoose.connect('mongodb://hadmin:hadmin@ds055895.mlab.com:55895/bargain-hunter');
     let db = mongoose.connection;
 
     /*db.on('error', function (error) {
