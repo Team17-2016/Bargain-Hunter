@@ -3,6 +3,10 @@ Telerik Academy Team Project
 
 Requirements: https://github.com/TelerikAcademy/Node.js-Course/tree/master/Teamwork
 
+Demo: https://bargain-hunter.herokuapp.com/
+
+Before deploying the app change npm start to node app.js to remove the nodemon dependancy.
+
 ## Project Description
     * Bargain Hunter is a place where consumers can sell items to other consumers and buy from them. 
     * Registered users can post advertisments and leave comments to other people ads. 
